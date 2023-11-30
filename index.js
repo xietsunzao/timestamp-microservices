@@ -13,14 +13,13 @@ app.get("/", function (req, res) {
 
 
 app.get('/api/:date', (req, res) => {
-    const { date } = req.params;
-    let dateObject;
+    let { date } = req.params;
 
-    if (isNaN(date)) {
-        dateObject = new Date(date);
-    } else {
-        dateObject = new Date(parseInt(date));
+    if (!date) {
+        date = new Date();
     }
+
+    let dateObject = new Date(date);
 
     if (isNaN(dateObject.getTime())) {
         res.json({ error: 'Invalid Date' });
